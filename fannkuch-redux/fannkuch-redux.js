@@ -77,7 +77,12 @@ function fannkuch(n) {
         // Rotate 0<-...<-i+1.
         t = p[0]; 
         for(var j=0; j<=i; j++) {
-          p[j] = p[j+1]; 
+          p[j] = p[j+1];
+          // Ammortizes both the cost of the loop and the cost of the bounds check. 
+          if (j+1<=i) {
+            p[j+1] = p[j+2];
+          }
+          j++;
         } 
         p[i+1] = t;
       }

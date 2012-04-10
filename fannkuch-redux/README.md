@@ -2,7 +2,7 @@ NBody Optimizations
 ========================================================================================================================
 - - -
 # Command Run
-time dd8 --nodebugger nbody/nbody-compiled.js -- 5000000
+time dd8 --nodebugger fannkuch-redux/fannkuch-redux.js -- 11
 
 # Results
 

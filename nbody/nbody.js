@@ -204,8 +204,10 @@ NBodySystem.prototype.advance = function(dt){
 
    for (var i=0; i<size; i++) {
       var bodyi = this.bodies[i];
+      var imass = bodyi.storage_[Body.MASS]
       for (var j=i+1; j<size; j++) {
          var bodyj = this.bodies[j];
+         var jmass = bodyj.storage_[Body.MASS];
          dx = bodyi.storage_[Body.X] - bodyj.storage_[Body.X];
          dy = bodyi.storage_[Body.Y] - bodyj.storage_[Body.Y];
          dz = bodyi.storage_[Body.Z] - bodyj.storage_[Body.Z];
@@ -213,21 +215,17 @@ NBodySystem.prototype.advance = function(dt){
          distance = Math.sqrt(dx*dx + dy*dy + dz*dz);
          mag = dt / (distance * distance * distance);
 
-         bodyi.storage_[Body.VX] -= dx * bodyj.storage_[Body.MASS] * mag;
-         bodyi.storage_[Body.VY] -= dy * bodyj.storage_[Body.MASS] * mag;
-         bodyi.storage_[Body.VZ] -= dz * bodyj.storage_[Body.MASS] * mag;
+         bodyi.storage_[Body.VX] -= dx * jmass * mag;
+         bodyi.storage_[Body.VY] -= dy * jmass * mag;
+         bodyi.storage_[Body.VZ] -= dz * jmass * mag;
 
-         bodyj.storage_[Body.VX] += dx * bodyi.storage_[Body.MASS] * mag;
-         bodyj.storage_[Body.VY] += dy * bodyi.storage_[Body.MASS] * mag;
-         bodyj.storage_[Body.VZ] += dz * bodyi.storage_[Body.MASS] * mag;
+         bodyj.storage_[Body.VX] += dx * imass * mag;
+         bodyj.storage_[Body.VY] += dy * imass * mag;
+         bodyj.storage_[Body.VZ] += dz * imass * mag;
       }
-   }
-
-   for (var i=0; i<size; i++) {
-      var body = this.bodies[i];
-      body.storage_[Body.X] += dt * body.storage_[Body.VX];
-      body.storage_[Body.Y] += dt * body.storage_[Body.VY];
-      body.storage_[Body.Z] += dt * body.storage_[Body.VZ];
+      bodyi.storage_[Body.X] += dt * bodyi.storage_[Body.VX];
+      bodyi.storage_[Body.Y] += dt * bodyi.storage_[Body.VY];
+      bodyi.storage_[Body.Z] += dt * bodyi.storage_[Body.VZ];
    }
 }
 
