@@ -20,9 +20,10 @@ Optimized: 5.154 s
 
 - There are tons of bounds checks in the generated code that seem redundant.  for example,
 
-var foo = new Int2Array(new Array(1000));
-for(int i = 0l i < 100l ++i) {
+```var foo = new Int2Array(new Array(1000));
+for(int i = 0; i < 100; ++i) {
   foo[i] = i;
 }
+```
 
 will bounds check EVERY iteration of the loop, when in reality it only needs to bounds check at the top of the loop.  Granted, this only works for loops of this form, but I feel like that probably constitutes a significant portion of all loops.

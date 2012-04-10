@@ -2,6 +2,7 @@
    http://shootout.alioth.debian.org/
 
    contributed by Isaac Gouy, transliterated from Mike Pall's Lua program 
+   Modified by Roy Williams
 */
 
 function fannkuch(n) {
@@ -29,7 +30,7 @@ function fannkuch(n) {
       var flips = 1;
       do { 
         var qq = q[q0]; 
-        if (qq == 0) {                                // ... until 0th element is 0.
+        if (qq == 0) {                            // ... until 0th element is 0.
           sum = (sum + sign*flips) | 0;
           if (flips > maxflips) {
             maxflips = flips;   // New maximum?
@@ -78,7 +79,8 @@ function fannkuch(n) {
         t = p[0]; 
         for(var j=0; j<=i; j++) {
           p[j] = p[j+1];
-          // Ammortizes both the cost of the loop and the cost of the bounds check. 
+          // Ammortizes both the cost of the loop and the cost of the bounds 
+          // check. 
           if (j+1<=i) {
             p[j+1] = p[j+2];
           }
