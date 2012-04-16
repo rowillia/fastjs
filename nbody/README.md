@@ -2,7 +2,7 @@ NBody Optimizations
 ========================================================================================================================
 - - -
 # Command Run
-time dd8 --nodebugger nbody/nbody-compiled.js -- 5000000
+time d8 --nodebugger nbody/nbody-compiled.js -- 5000000
 
 # Results
 

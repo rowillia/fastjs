@@ -264,7 +264,10 @@ NBodySystem.prototype.energy = function(){
  */
 n = arguments[0];
 
-this['runTest'] = function(n) {
+/**
+ * @param {number} n
+ */
+runTest = function(n) {
   var bodyBuffer = new ArrayBuffer(Body.BYTES_SIZE * 5);
   var bodies = new NBodySystem( Array( 
      Sun(bodyBuffer, 0),Jupiter(bodyBuffer, 1),
@@ -275,4 +278,4 @@ this['runTest'] = function(n) {
   print(bodies.energy().toFixed(9));
 }
 
-this['runTest'](n);
+runTest(n);

@@ -2,7 +2,7 @@
    http://shootout.alioth.debian.org/
 
    contributed by Isaac Gouy, transliterated from Mike Pall's Lua program 
-   Modified by Roy Williams
+   Modified by Roy Williams.
 */
 
 function fannkuch(n) {
@@ -12,21 +12,17 @@ function fannkuch(n) {
       s = new Int32Array(storage, n * 8, n);
   var sign = 1, maxflips = 0, sum = 0, m = n-1;
   
+  q[0] = 0;
   for(var i=0; i<n; i++){ 
     p[i] = i; 
-    q[i] = i; 
     s[i] = i; 
   }
   do {
     // Copy and flip.
     var q0 = p[0];                                     // Cache 0th element.
-    if (q0 != 0){
-      for(var i=1; i<n; i++) {
-        q[i] = p[i];             // Work on a copy.
-        i++;
-        if (i>=n) break;
-        q[i] = p[i];
-      }
+    if (q0 != 0) {
+      q.set(p);                                   // Work on a copy.
+      q[0] = q0;
       var flips = 1;
       do { 
         var qq = q[q0]; 
@@ -79,12 +75,6 @@ function fannkuch(n) {
         t = p[0]; 
         for(var j=0; j<=i; j++) {
           p[j] = p[j+1];
-          // Ammortizes both the cost of the loop and the cost of the bounds 
-          // check. 
-          if (j+1<=i) {
-            p[j+1] = p[j+2];
-          }
-          j++;
         } 
         p[i+1] = t;
       }
