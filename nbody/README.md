@@ -2,7 +2,7 @@ NBody Optimizations
 ========================================================================================================================
 - - -
 # Command Run
-java -jar ../third_party/compiler.jar  --compilation_level ADVANCED_OPTIMIZATIONS --js nbody/nbody.js --externs ../externs/html5.js > nbody/nbody-compiled.js
+java -jar ../third_party/compiler.jar  --compilation_level ADVANCED_OPTIMIZATIONS --js nbody.js --externs ../externs/html5.js > nbody-compiled.js
 time d8 --nodebugger nbody/nbody-compiled.js -- 5000000
 
 # Results
